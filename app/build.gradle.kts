@@ -47,10 +47,17 @@ dependencies {
     implementation(Dependencies.Retrofit.library)
     implementation(Dependencies.Retrofit.gsonConverter)
 
+
+
     implementation("com.squareup.picasso:picasso:2.8")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.1")
     implementation("androidx.datastore:datastore-preferences:1.1.1")
     implementation("com.google.mlkit:barcode-scanning:17.3.0")
+
+    implementation ("io.ktor:ktor-client-core:2.3.5")
+    implementation ("io.ktor:ktor-client-cio:2.3.5")
+    implementation ("io.ktor:ktor-client-content-negotiation:2.3.5")
+    implementation ("io.ktor:ktor-serialization-kotlinx-json:2.3.5")
 
     val cameraX = "1.3.4"
     implementation("androidx.camera:camera-core:$cameraX")

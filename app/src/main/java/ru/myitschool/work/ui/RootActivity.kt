@@ -21,7 +21,7 @@ class RootActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_root)
 
-        val navHostFragment = supportFragmentManager
+        /*val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment?
 
         if (navHostFragment != null) {
@@ -52,5 +52,6 @@ class RootActivity : AppCompatActivity() {
             false
         }
         return popBackResult || super.onSupportNavigateUp()
+    }*/
     }
 }

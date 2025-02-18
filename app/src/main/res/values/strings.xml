@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">NTO Pass</string>
+    <string name="authorization">Авторизация</string>
+    <string name="login">Логин</string>
+    <string name="password">Пароль</string>
+    <string name="password_hint">Пароль должен содержать не менее 8 символов</string>
+    <string name="sign_in">Войти</string>
+    <string name="error_valid">Ошибка валидации\n</string>
+    <string name="error_invalid_credentials">Неверный логин или пароль</string>
+    <string name="error_unknown">Непредвиденная ошибка</string>
 </resources>
