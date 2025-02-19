@@ -1,5 +1,6 @@
 package ru.myitschool.work.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
@@ -17,22 +18,28 @@ import ru.myitschool.work.ui.qr.scan.QrScanFragment
 // НЕ ИЗМЕНЯЙТЕ НАЗВАНИЕ КЛАССА!
 @AndroidEntryPoint
 class RootActivity : AppCompatActivity() {
+    @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_root)
+        setContentView(R.layout.fragment_profile)
+        val userRole = intent.getStringExtra("USER_ROLE")
 
         /*val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment?
+        val navController = navHostFragment.navController*/
 
-        if (navHostFragment != null) {
-            val navController = navHostFragment.navController
-            navController.graph = navController.createGraph(
-                startDestination = LoginDestination
-            ) {
-                fragment<LoginFragment, LoginDestination>()
-                fragment<QrScanFragment, QrScanDestination>()
-            }
-        }
+
+
+        /*if (userRole == "ROLE_ADMIN") {
+            bottomNavigationView.menu.clear()
+            bottomNavigationView.inflateMenu(R.menu.bottom_menu_admin)
+            navController.setGraph(R.navigation.main_admin_nav_graph)
+
+        } else {
+            bottomNavigationView.menu.clear()
+            bottomNavigationView.inflateMenu(R.menu.bottom_menu)
+            navController.setGraph(R.navigation.main_nav_graph)
+        }*/
 
         onBackPressedDispatcher.addCallback(
             this,
@@ -44,7 +51,7 @@ class RootActivity : AppCompatActivity() {
         )
     }
 
-    override fun onSupportNavigateUp(): Boolean {
+    /*override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         val popBackResult = if (navController.previousBackStackEntry != null) {
             navController.popBackStack()
@@ -53,5 +60,5 @@ class RootActivity : AppCompatActivity() {
         }
         return popBackResult || super.onSupportNavigateUp()
     }*/
-    }
+
 }

@@ -106,7 +106,7 @@
             tools:text="Иванова Вера Павловна" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/position"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -118,6 +118,7 @@
             tools:text="Должность: Разработчик" />
 
         <TextView
+            android:id="@+id/lastEntry"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -125,7 +126,7 @@
             android:textColor="@color/black"
             android:textSize="16dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/position"
             tools:text="Время последнего входа: 12:00 16.09" />
 
         <com.google.android.material.button.MaterialButton
@@ -167,6 +168,7 @@
 
 
         <View
+            android:id="@+id/view"
             android:layout_width="1dp"
             android:layout_height="35dp"
             android:layout_marginTop="7dp"
@@ -189,25 +191,70 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="8dp"
+            android:elevation="10dp"
             android:gravity="center"
             android:text="@string/entry_time"
             android:textColor="@color/white"
             android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@+id/view2"
             app:layout_constraintEnd_toStartOf="@+id/view3"
             app:layout_constraintHorizontal_bias="0.51"
             app:layout_constraintStart_toStartOf="@+id/view2"
-            app:layout_constraintTop_toTopOf="@+id/view2"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toTopOf="@+id/view2" />
+
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="8dp"
+            android:elevation="10dp"
+            android:gravity="center"
+            android:text="@string/entry"
+            android:textColor="@color/white"
+
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/view"
+
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/view3"
+            app:layout_constraintTop_toTopOf="@+id/view2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="8dp"
+            android:elevation="10dp"
+            android:gravity="center"
+            android:text="@string/type_of_entrance"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/view"
+            app:layout_constraintTop_toTopOf="@+id/view2" />
+
+        <TextView
+            android:id="@+id/no_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:text="@string/no_data"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view2" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:layout_marginBottom="16dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"

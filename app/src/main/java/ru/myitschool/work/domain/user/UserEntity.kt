@@ -8,7 +8,7 @@ data class UserEntity(
     var name: String,
     var avatarUrl: String?,
     val position : String,
-    var lastEntry : String,
+    var lastEntry : String?,
     val authorities : String
 
 )

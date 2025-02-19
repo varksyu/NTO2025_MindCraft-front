@@ -18,8 +18,8 @@ data class UserDto(
     var avatarUrl: String?,
     @SerialName("position")
     val position: String,
-    @SerialName("lastEntry")
-    val lastEntry : String,
+    @SerialName("lastEnter")
+    val lastEntry : String? = null,
     @SerialName("authorities")
     val authorities : String
 ) {

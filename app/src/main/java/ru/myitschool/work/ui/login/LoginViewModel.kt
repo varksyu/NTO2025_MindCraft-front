@@ -17,14 +17,13 @@ import ru.myitschool.work.R
 import ru.myitschool.work.data.auth.AuthNetworkDataSource
 import ru.myitschool.work.data.auth.AuthRepoImpl
 import ru.myitschool.work.data.auth.AuthStorageDataSource
-import ru.myitschool.work.domain.auth.IsUserExistUseCase
+//import ru.myitschool.work.domain.auth.IsUserExistUseCase
 import ru.myitschool.work.domain.auth.LoginUseCase
 import javax.inject.Inject
 import kotlin.reflect.KClass
 
 class LoginViewModel constructor(
     @ApplicationContext private val context: Context,
-    private val isUserExistUseCase: IsUserExistUseCase,
     private  val loginUseCase: LoginUseCase
 ) : ViewModel() {
     private val _state = MutableStateFlow<State>(getStateShow())
@@ -49,44 +48,23 @@ class LoginViewModel constructor(
     )
     {
         viewModelScope.launch {
-            when (checkUserExistence(login)) {
-                true -> {
-                    loginUser(login, password)
-                }
-                false -> {
-                    updateState(context.getString(R.string.error_invalid_credentials))
-                }
-                null -> updateState(context.getString(R.string.error_unknown))
-            }
+            loginUser(login, password)
+
         }
     }
 
-    private suspend fun checkUserExistence(email: String):Boolean?{
-        return try {
-            val result = isUserExistUseCase(email)
-            result.fold(
-                onSuccess = {isExist -> isExist},
-                onFailure = {
-                    Log.e("LoginViewModel", "Error checking user existence", it)
-                    null
-                }
-            )
-        } catch (e: Exception) {
-            Log.e("LoginViewModel", "Error during user existence check", e)
-            null
-        }
-    }
 
 
     private suspend fun loginUser(email: String, password: String) {
         loginUseCase(email, password).fold(
             onSuccess = { user ->
-                println("Login successful")
+                Log.d("loginViewModel","Login successful")
                 _userRole.emit(user.authorities)
                 _navigateToMain.emit(user.authorities)
             },
             onFailure = { error ->
                 updateState(error.message ?: context.getString(R.string.error_unknown))
+                Log.d("errorLoginViewModel","${error.message}")
             }
         )
     }
@@ -125,7 +103,6 @@ class LoginViewModel constructor(
                 )
                 return LoginViewModel(
                     application,
-                    isUserExistUseCase = IsUserExistUseCase(authRepoImpl),
                     loginUseCase = LoginUseCase(authRepoImpl)
                 ) as T
             }

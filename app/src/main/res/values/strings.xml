@@ -10,4 +10,7 @@
     <string name="error_unknown">Непредвиденная ошибка</string>
     <string name="entry_history">История входов\n</string>
     <string name="entry_time">Время входа\n</string>
+    <string name="entry">Вход</string>
+    <string name="type_of_entrance">Тип прохода</string>
+    <string name="no_data">Нет данных\n</string>
 </resources>
