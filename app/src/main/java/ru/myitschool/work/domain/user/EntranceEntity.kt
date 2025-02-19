@@ -1,6 +1,5 @@
 package ru.myitschool.work.domain.user
 
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable

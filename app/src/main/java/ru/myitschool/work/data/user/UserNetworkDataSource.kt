@@ -4,6 +4,7 @@ import android.util.Log
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.request.header
+import io.ktor.client.request.patch
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
@@ -45,5 +46,18 @@ class UserNetworkDataSource {
             result.body()
         }
 
+    }
+    suspend fun enter(value : Long, login : String): Result<Boolean> = withContext(Dispatchers.IO) {
+        runCatching {
+            val result = client.patch("$SERVER_ADDRESS/api/open") {
+                header(HttpHeaders.Authorization, token)
+
+            }
+            Log.d("result", "${result.status}")
+            if (result.status != HttpStatusCode.OK) {
+                error("Status ${result.status}")
+            }
+            result.body<Boolean>()
+        }
     }
 }

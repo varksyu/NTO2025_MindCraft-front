@@ -2,6 +2,7 @@ package ru.myitschool.work.data.user
 import ru.myitschool.work.domain.user.EntranceEntity
 import ru.myitschool.work.domain.user.UserEntity
 import ru.myitschool.work.domain.user.UserRepo
+import kotlin.math.log
 
 
 class UserRepoImpl (
@@ -28,12 +29,20 @@ class UserRepoImpl (
             userList.map { it.toEntity() }
         }
     }
+
+    override suspend fun enter(value: Long, login : String): Result<Boolean> {
+        return userNetworkDataSource.enter(value, login);
+    }
+
     fun EntranceDto.toEntity(): EntranceEntity {
         return EntranceEntity(
             login = login,
             name = this.name,
             enteredAt = this.enteredAt,
+
             enterType = this.enterType
         )
     }
+
+
 }
