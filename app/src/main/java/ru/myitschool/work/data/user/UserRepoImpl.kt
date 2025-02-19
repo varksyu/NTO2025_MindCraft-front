@@ -1,7 +1,4 @@
-package ru.sicampus.bootcamp2025.data.user
-
-import ru.myitschool.work.data.user.EntranceDto
-import ru.myitschool.work.data.user.UserDto
+package ru.myitschool.work.data.user
 import ru.myitschool.work.domain.user.EntranceEntity
 import ru.myitschool.work.domain.user.UserEntity
 import ru.myitschool.work.domain.user.UserRepo
@@ -35,7 +32,7 @@ class UserRepoImpl (
         return EntranceEntity(
             login = login,
             name = this.name,
-            enterAt = this.enterAt,
+            enteredAt = this.enteredAt,
             enterType = this.enterType
         )
     }

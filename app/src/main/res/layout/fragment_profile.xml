@@ -130,7 +130,7 @@
             tools:text="Время последнего входа: 12:00 16.09" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/materialButton"
+            android:id="@+id/qrScan"
             android:layout_width="80dp"
             android:layout_height="90dp"
             android:layout_marginTop="148dp"
@@ -262,7 +262,8 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view2"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.0"
+            tools:listitem="@layout/one_entry_list_view"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

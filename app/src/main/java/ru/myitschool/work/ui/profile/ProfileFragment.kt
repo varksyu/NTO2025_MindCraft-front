@@ -10,6 +10,7 @@ import com.squareup.picasso.Picasso
 import ru.myitschool.work.R
 import ru.myitschool.work.databinding.FragmentProfileBinding
 import ru.myitschool.work.ui.login.EntryActivity
+import ru.myitschool.work.ui.qr.scan.QrScanFragment
 import ru.myitschool.work.utils.collectWithLifecycle
 
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
@@ -31,6 +32,14 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             startActivity(intent)
             requireActivity().finish()
         }
+        viewBinding.qrScan.setOnClickListener{
+            val qrScanFragment = QrScanFragment()
+            val fragmentManager = parentFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.fragment_container, qrScanFragment)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }
 
 
         viewModel.state.collectWithLifecycle(this) { state ->
@@ -42,24 +51,26 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             when(state) {
                 is ProfileViewModel.State.Loading -> Unit
                 is ProfileViewModel.State.Show -> {
+                    viewBinding.noData.visibility = View.GONE
                     viewBinding.name.text = state.profileInfo.name
                     viewBinding.position.text = "Должность: ${state.profileInfo.name}"
                     if (state.profileInfo.lastEntry == null) viewBinding.lastEntry.text = "Время последнего входа: Нет данных"
                     else viewBinding.lastEntry.text = "Время последнего входа: ${state.profileInfo.lastEntry}"
                     Picasso.get().load(state.profileInfo.avatarUrl).resize(100, 100).centerCrop().into(viewBinding.imageView)
 
-                    //if (state.entrancesList == emptyList())
-                    //viewBinding.recyclerView.visibility = View.GONE
+                    if (state.entrancesList.size == 0) {
+                        viewBinding.noData.visibility = View.VISIBLE
+                    }
+
                 }
                 is ProfileViewModel.State.Error -> {
                     viewBinding.errorText.text = state.text
-                    //viewBinding.noData.visibility = View.VISIBLE
+
                 }
             }
 
         }
     }
-
 
     override fun onDestroyView() {
         _viewBinding = null

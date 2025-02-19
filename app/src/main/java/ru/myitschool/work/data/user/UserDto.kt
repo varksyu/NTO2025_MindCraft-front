@@ -20,18 +20,9 @@ data class UserDto(
     val position: String,
     @SerialName("lastEnter")
     val lastEntry : String? = null,
+    @SerialName("access")
+    val access : String,
     @SerialName("authorities")
     val authorities : String
 ) {
-    fun toEntity(): UserEntity {
-        return UserEntity(
-            id = id ?: throw IllegalArgumentException("User ID cannot be null"),
-            login,
-            name = name,
-            avatarUrl = avatarUrl,
-            position = position,
-            lastEntry = lastEntry,
-            authorities = authorities
-        )
-    }
 }

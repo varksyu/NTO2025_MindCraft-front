@@ -21,34 +21,42 @@ class RootActivity : AppCompatActivity() {
     @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_profile)
+        setContentView(R.layout.activity_root)
         val userRole = intent.getStringExtra("USER_ROLE")
 
-        /*val navHostFragment = supportFragmentManager
+        val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment?
-        val navController = navHostFragment.navController*/
 
 
 
+        val navController = navHostFragment?.navController ?: throw IllegalStateException("NavHostFragment not found")
+
+        navController.setGraph(R.navigation.main_nav_graph)
+        navController.navigate(R.id.fragment_profile)
         /*if (userRole == "ROLE_ADMIN") {
-            bottomNavigationView.menu.clear()
-            bottomNavigationView.inflateMenu(R.menu.bottom_menu_admin)
+            //bottomNavigationView.menu.clear()
+            //bottomNavigationView.inflateMenu(R.menu.bottom_menu_admin)
             navController.setGraph(R.navigation.main_admin_nav_graph)
 
         } else {
-            bottomNavigationView.menu.clear()
-            bottomNavigationView.inflateMenu(R.menu.bottom_menu)
             navController.setGraph(R.navigation.main_nav_graph)
+            navController.navigate(R.id.fragment_profile)
         }*/
 
-        onBackPressedDispatcher.addCallback(
+
+
+
+
+
+
+        /*onBackPressedDispatcher.addCallback(
             this,
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
                     onSupportNavigateUp()
                 }
             }
-        )
+        )*/
     }
 
     /*override fun onSupportNavigateUp(): Boolean {

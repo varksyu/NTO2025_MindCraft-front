@@ -8,11 +8,12 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import ru.myitschool.work.data.auth.AuthStorageDataSource
+import ru.myitschool.work.data.user.UserNetworkDataSource
+import ru.myitschool.work.data.user.UserRepoImpl
 import ru.myitschool.work.domain.user.EntranceEntity
 import ru.myitschool.work.domain.user.GetUserUseCase
 import ru.myitschool.work.domain.user.UserEntity
-import ru.sicampus.bootcamp2025.data.user.UserNetworkDataSource
-import ru.sicampus.bootcamp2025.data.user.UserRepoImpl
+
 
 class ProfileViewModel(
     private val getUserUseCase: GetUserUseCase

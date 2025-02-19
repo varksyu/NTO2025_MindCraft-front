@@ -1,7 +1,7 @@
 package ru.myitschool.work.domain.user
 
-import java.sql.Timestamp
-
+import kotlinx.serialization.Serializable
+@Serializable
 data class UserEntity(
     val id : Long,
     var login: String,

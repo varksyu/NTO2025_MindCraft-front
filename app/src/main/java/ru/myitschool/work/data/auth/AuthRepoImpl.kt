@@ -7,9 +7,6 @@ class AuthRepoImpl(
     private val authNetworkDataSource: AuthNetworkDataSource,
     private val authStorageDataSource: AuthStorageDataSource
 ) : AuthRepo {
-//    override suspend fun isUserExist(email: String): Result<Boolean?> {
-//        return authNetworkDataSource.isUserExist(email)
-//    }
 
     override suspend fun login(email: String, password: String): Result<UserDto> {
         val token = authStorageDataSource.updateToken(email, password)
