@@ -8,4 +8,6 @@
     <string name="error_valid">Ошибка валидации\n</string>
     <string name="error_invalid_credentials">Неверный логин или пароль</string>
     <string name="error_unknown">Непредвиденная ошибка</string>
+    <string name="entry_history">История входов\n</string>
+    <string name="entry_time">Время входа\n</string>
 </resources>

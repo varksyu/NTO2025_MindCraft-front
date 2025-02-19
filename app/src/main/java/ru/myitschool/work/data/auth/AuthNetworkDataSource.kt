@@ -19,7 +19,7 @@ object AuthNetworkDataSource {
 
     suspend fun isUserExist(login: String): Result<Boolean?> = withContext(Dispatchers.IO) {
         runCatching {
-            val result = client.get("$SERVER_ADDRESS/api/user/login/$login") //10.0.2.2
+            val result = client.get("$SERVER_ADDRESS/api/login/$login") //10.0.2.2
             when (result.status) {
                 HttpStatusCode.OK -> { return@runCatching true }
                 HttpStatusCode.NotFound -> { return@runCatching false }
@@ -30,7 +30,7 @@ object AuthNetworkDataSource {
 
     suspend fun login(token: String): Result<UserDto> = withContext(Dispatchers.IO) {
         runCatching {
-            val result = client.get("$SERVER_ADDRESS/api/user/login") {
+            val result = client.get("$SERVER_ADDRESS/api/login") {
                 header(HttpHeaders.Authorization, token)
             }
             if (result.status == HttpStatusCode.Unauthorized) {
