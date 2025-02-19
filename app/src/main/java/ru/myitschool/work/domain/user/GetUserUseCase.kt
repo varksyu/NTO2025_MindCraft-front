@@ -7,7 +7,7 @@ class GetUserUseCase(
     private val repo: UserRepo,
     private val authStorageDataSource: AuthStorageDataSource
 ) {
-    suspend fun getUserFromStorage() : UserDto? {
+    private fun getUserFromStorage() : UserDto? {
         return authStorageDataSource.userInfo
     }
     suspend operator fun invoke() = repo.getUser(getUserFromStorage()?.login!!)

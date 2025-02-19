@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import ru.myitschool.work.domain.user.EnterUseCase
 import ru.myitschool.work.utils.MutablePublishFlow
 
 // НЕ ИЗМЕНЯЙТЕ ЭТОТ ФАЙЛ. В ТЕСТАХ ОН БУДЕМ ВОЗВРАЩЁН В ИСХОДНОЕ СОСТОЯНИЕ
@@ -90,4 +91,5 @@ class QrScanViewModel(
 
         const val CAMERA_PERMISSION = Manifest.permission.CAMERA
     }
+
 }

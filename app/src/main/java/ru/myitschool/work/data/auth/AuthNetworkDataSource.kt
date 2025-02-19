@@ -4,6 +4,7 @@ import android.util.Log
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.request.header
+import io.ktor.client.request.patch
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.http.ContentType
@@ -24,6 +25,7 @@ object AuthNetworkDataSource {
         runCatching {
             val result = client.get("$SERVER_ADDRESS/api/login") {
                 header(HttpHeaders.Authorization, token)
+
             }
             Log.d("result", "${result.status}")
             if (result.status == HttpStatusCode.Unauthorized) {
@@ -31,7 +33,5 @@ object AuthNetworkDataSource {
             }
             result.body<UserDto>()
         }
-
     }
-
 }
