@@ -1,10 +1,11 @@
 package ru.myitschool.work.ui.login
 
-import LoginUseCase
 import android.content.Context
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.CreationExtras
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -13,16 +14,20 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import ru.myitschool.work.R
+import ru.myitschool.work.data.auth.AuthNetworkDataSource
+import ru.myitschool.work.data.auth.AuthRepoImpl
+import ru.myitschool.work.data.auth.AuthStorageDataSource
 import ru.myitschool.work.domain.auth.IsUserExistUseCase
+import ru.myitschool.work.domain.auth.LoginUseCase
 import javax.inject.Inject
+import kotlin.reflect.KClass
 
-@HiltViewModel
-class LoginViewModel @Inject constructor(
+class LoginViewModel constructor(
     @ApplicationContext private val context: Context,
     private val isUserExistUseCase: IsUserExistUseCase,
     private  val loginUseCase: LoginUseCase
 ) : ViewModel() {
-    private val _state = MutableStateFlow(true)
+    private val _state = MutableStateFlow<State>(getStateShow())
     val state = _state.asStateFlow()
 
     private val _navigateToMain = MutableSharedFlow<String?>()
@@ -31,7 +36,7 @@ class LoginViewModel @Inject constructor(
     private val _userRole = MutableSharedFlow<String>()
     val userRole = _userRole.asSharedFlow()
 
-/*
+
     init {
         viewModelScope.launch {
             updateState()
@@ -39,15 +44,14 @@ class LoginViewModel @Inject constructor(
 
     }
     fun auth(
-        email : String,
+        login : String,
         password : String
     )
     {
         viewModelScope.launch {
-            _state.emit(State.Loading)
-            when (checkUserExistence(email)) {
+            when (checkUserExistence(login)) {
                 true -> {
-                    loginUser(email, password)
+                    loginUser(login, password)
                 }
                 false -> {
                     updateState(context.getString(R.string.error_invalid_credentials))
@@ -63,12 +67,12 @@ class LoginViewModel @Inject constructor(
             result.fold(
                 onSuccess = {isExist -> isExist},
                 onFailure = {
-                    Log.e("AuthViewModel", "Error checking user existence", it)
+                    Log.e("LoginViewModel", "Error checking user existence", it)
                     null
                 }
             )
         } catch (e: Exception) {
-            Log.e("AuthViewModel", "Error during user existence check", e)
+            Log.e("LoginViewModel", "Error during user existence check", e)
             null
         }
     }
@@ -105,28 +109,27 @@ class LoginViewModel @Inject constructor(
     }
 
     sealed interface State {
-        data object Loading : State
         data class Show(
             var errorText : String?
         ) : State
     }
-*/
 
-    /*companion object {
+
+    companion object {
         val Factory : ViewModelProvider.Factory = object : ViewModelProvider.Factory {
-            override fun <T : ViewModel> create(modelClass: KClass<T>, extras: CreationExtras): T {
+            override fun <T : ViewModel> create(modelClass: Class<T>, extras: CreationExtras): T {
                 val application = extras[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY]!!
                 val authRepoImpl = AuthRepoImpl(
                     authNetworkDataSource = AuthNetworkDataSource,
                     authStorageDataSource = AuthStorageDataSource
                 )
-                return AuthViewModel(
-                    application = application,
+                return LoginViewModel(
+                    application,
                     isUserExistUseCase = IsUserExistUseCase(authRepoImpl),
                     loginUseCase = LoginUseCase(authRepoImpl)
                 ) as T
             }
 
         }
-    }*/
+    }
 }

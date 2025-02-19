@@ -1,12 +1,12 @@
 package ru.myitschool.work.data.auth
 
 import ru.myitschool.work.data.user.UserDto
-import ru.sicampus.bootcamp2025.domain.auth.AuthRepo
+import ru.myitschool.work.domain.auth.AuthRepo
 
 class AuthRepoImpl(
     private val authNetworkDataSource: AuthNetworkDataSource,
     private val authStorageDataSource: AuthStorageDataSource
-) : AuthRepo{
+) : AuthRepo {
     override suspend fun isUserExist(email: String): Result<Boolean?> {
         return authNetworkDataSource.isUserExist(email)
     }

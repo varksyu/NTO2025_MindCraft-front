@@ -11,7 +11,9 @@ import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import ru.myitschool.work.R
 import ru.myitschool.work.databinding.FragmentLoginBinding
+import ru.myitschool.work.ui.RootActivity
 import ru.myitschool.work.utils.collectWhenStarted
+import ru.myitschool.work.utils.collectWithLifecycle
 import ru.myitschool.work.utils.visibleOrGone
 
 @AndroidEntryPoint
@@ -19,17 +21,17 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     private var _viewBinding: FragmentLoginBinding? = null
     private val viewBinding: FragmentLoginBinding get() = _viewBinding!!
 
-    private val viewModel: LoginViewModel by viewModels()
+    private val viewModel: LoginViewModel by viewModels() {LoginViewModel.Factory}
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _viewBinding = FragmentLoginBinding.bind(view)
 
 
-        /*viewBinding.signInButton.setOnClickListener {
+        viewBinding.signInButton.setOnClickListener {
             val login = viewBinding.userLogin.text.toString()
             val password = viewBinding.userPassword.text.toString()
-            if (!isValidEmail(login)) {
+            if (!isValidLogin(login)) {
                 viewBinding.errorText.text = getString(R.string.error_valid)
                 viewBinding.errorText.visibility = View.VISIBLE
             }
@@ -38,13 +40,13 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 viewBinding.errorText.visibility = View.VISIBLE
             }
             else {
-                viewModel.auth(email, password)
+                viewModel.auth(login, password)
                 viewBinding.errorText.visibility = View.GONE
             }
         }
 
         viewModel.state.collectWithLifecycle(this) { state ->
-            if (state is AuthViewModel.State.Show) {
+            if (state is LoginViewModel.State.Show) {
                 viewBinding.errorText.text = state.errorText.toString()
                 viewBinding.errorText.visibility =
                     if (state.errorText == null) View.GONE else View.VISIBLE
@@ -52,7 +54,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         }
 
         viewModel.navigateToMain.collectWithLifecycle(viewLifecycleOwner) { userRole ->
-            val intent = Intent(requireContext(), MainActivity::class.java).apply {
+            val intent = Intent(requireContext(), RootActivity::class.java).apply {
                 putExtra("USER_ROLE", userRole)
             }
             startActivity(intent)
@@ -66,10 +68,10 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
             }
 
-        })*/
+        })
     }
-    private fun isValidEmail(email: String): Boolean {
-        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    private fun isValidLogin(email: String): Boolean {
+        return true //Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
     private fun isValidPassword(password : String) : Boolean {
         return password.length >= 8

@@ -12,8 +12,6 @@ data class UserDto(
     val id : Long?,
     @SerialName("login")
     var login: String,
-    @SerialName("birthDate")
-    var birthDate : String?,
     @SerialName("name")
     var name: String,
     @SerialName("avatarUrl")
