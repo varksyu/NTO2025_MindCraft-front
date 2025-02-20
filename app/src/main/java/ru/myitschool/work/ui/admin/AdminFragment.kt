@@ -3,11 +3,14 @@ package ru.myitschool.work.ui.admin
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.launch
 import ru.myitschool.work.R
 import ru.myitschool.work.databinding.FragmentAdminBinding
 import ru.myitschool.work.databinding.FragmentProfileBinding
@@ -33,17 +36,34 @@ class AdminFragment : Fragment(R.layout.fragment_admin) {
             viewModel.search(login)
         }
 
+        viewBinding.switchMaterial.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                viewModel.viewModelScope.launch {
+                    viewModel.unblockUser()
+                    viewBinding.switchMaterial.text = "Доступ запрещен"
+                }
+            } else {
+                viewModel.viewModelScope.launch {
+                    viewModel.blockUser()
+                    viewBinding.switchMaterial.text = "Доступ разрешен"
+                }
+
+            }
+        }
+
 
     viewModel.state.collectWithLifecycle(this) { state ->
 
         viewBinding.error.visibility = if (state is AdminViewModel.State.Error) View.VISIBLE else View.GONE
+        viewBinding.switchMaterial.visibility = if (state is AdminViewModel.State.Show) View.VISIBLE else View.GONE
 
 
         when(state) {
             is AdminViewModel.State.Loading -> Unit
             is AdminViewModel.State.Show -> {
                 viewBinding.noData.visibility = View.GONE
-                viewBinding.name.text = "Должность: ${state.profileInfo.position}"
+                viewBinding.name.text = "${state.profileInfo.name}"
+                viewBinding.position.text = "Должность: ${state.profileInfo.position}"
                 if (state.profileInfo.lastEntry == null) viewBinding.lastEntry.text = "Время последнего входа: Нет данных"
                 else viewBinding.lastEntry.text = "Время последнего входа: ${state.profileInfo.lastEntry}"
                 Picasso.get().load(state.profileInfo.avatarUrl).resize(100, 100).centerCrop().into(viewBinding.imageView)

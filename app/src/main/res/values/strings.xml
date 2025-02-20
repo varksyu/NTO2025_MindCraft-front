@@ -17,8 +17,10 @@
     <string name="qr_wrong_result">Что-то пошло не так</string>
     <string name="qr_null_result">Вход был отменён</string>
     <string name="profile">Профиль</string>
-    <string name="user_view">Просмотр пользователя</string>
-    <string name="found_user">Найти информацию о сотруднике</string>
+    <string name="user_view" translatable="false">Просмотр пользователя</string>
+    <string name="found_user" translatable="false">Найти информацию о сотруднике</string>
     <string name="find">Найти</string>
-    <string name="access">Доступ\n</string>
+    <string name="access" translatable="false">Доступ\n</string>
+    <string name="access_right" translatable="false">Доступ разрешен</string>
+    <string name="access_wrong" translatable="false">Доступ запрещен</string>
 </resources>

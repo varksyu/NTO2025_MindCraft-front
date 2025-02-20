@@ -134,13 +134,6 @@
             android:gravity="center"
             tools:text="Ошибка помогите" />
 
-        <Button
-            android:id="@+id/refresh"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_gravity="center"
-            android:background="@drawable/ic_refresh"
-            android:gravity="center" />
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -242,6 +235,7 @@
             app:layout_constraintVertical_bias="1.0" />
 
         <TextView
+            android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_marginBottom="4dp"
@@ -314,11 +308,24 @@
             app:layout_constraintTop_toBottomOf="@+id/view2" />
 
 
-
-
-
-
-
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switchMaterial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/access_right"
+            android:textColor="@color/black"
+            android:textOff="@string/access_wrong"
+            android:textOn="@string/access_right"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/textView4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lastEntry"
+            app:layout_constraintVertical_bias="0.634"
+            app:thumbTint="@color/white"
+            app:trackTint="@color/orange" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"

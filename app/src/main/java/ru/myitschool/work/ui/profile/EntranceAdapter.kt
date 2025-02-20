@@ -1,6 +1,7 @@
 package ru.sicampus.bootcamp2025.ui.centerList
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -34,7 +35,7 @@ class EntranceAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item : EntranceEntity) {
             binding.time.text = item.enteredAt
-            binding.time.text = item.enterType
+            binding.type.text = item.enterType
             binding.entry.text = item.name
         }
     }

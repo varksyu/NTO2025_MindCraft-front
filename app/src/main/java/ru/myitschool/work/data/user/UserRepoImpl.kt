@@ -19,6 +19,7 @@ class UserRepoImpl (
                 login = login,
                 position = dto.position,
                 lastEntry = dto.lastEntry ?: "",
+                access = dto.access
             )
 
             }

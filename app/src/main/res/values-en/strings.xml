@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">NTO Pass</string>
+    <string name="authorization">Authorization</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="password_hint">Password must contain at least 8 characters</string>
+    <string name="sign_in">Sign in</string>
+    <string name="error_valid">Validation Error</string>
+    <string name="error_invalid_credentials">Wrong login or password</string>
+    <string name="error_unknown">Unknown error</string>
+    <string name="entry_history">Entry history</string>
+    <string name="entry_time">Entry time</string>
+    <string name="entry">Entry</string>
+    <string name="type_of_entrance">Type of pass</string>
+    <string name="no_data">No data</string>
+    <string name="qr_success_result">Success</string>
+    <string name="qr_wrong_result">Something wrong</string>
+    <string name="qr_null_result">Operation was cancelled</string>
+    <string name="profile">Profile</string>
+    <string name="find">Find</string>
+    <string name="close_button">Close</string>
+</resources>

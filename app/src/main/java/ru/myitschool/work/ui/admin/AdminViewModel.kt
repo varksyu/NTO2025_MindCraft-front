@@ -42,8 +42,9 @@ class AdminViewModel(
                 getUserUseCase.invoke(login).fold(
                     onSuccess = { data ->
                         Log.d("uraa", "успех успех ${data.toString()}")
+                        if (data.access == true) State.Show(data, entranceList, true)
+                        else State.Show(data, entranceList, false)
 
-                        State.Show(data, entranceList)
                     },
                     onFailure = { error ->
                         Log.d("kaput", error.message.toString())
@@ -115,7 +116,8 @@ class AdminViewModel(
         data object Loading: State
         data class Show(
             val profileInfo : UserEntity,
-            val entrancesList : List<EntranceEntity>
+            val entrancesList : List<EntranceEntity>,
+            val flag : Boolean
         ) : State
         data class Error(
             val text: String

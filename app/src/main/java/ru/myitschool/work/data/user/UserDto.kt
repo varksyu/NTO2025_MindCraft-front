@@ -21,7 +21,7 @@ data class UserDto(
     @SerialName("lastEnter")
     val lastEntry : String? = null,
     @SerialName("access")
-    val access : String,
+    val access : Boolean,
     @SerialName("authorities")
     val authorities : String
 ) {

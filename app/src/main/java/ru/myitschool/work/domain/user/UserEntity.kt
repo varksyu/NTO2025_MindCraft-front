@@ -4,11 +4,12 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class UserEntity(
     val id : Long,
-    var login: String,
-    var name: String,
-    var avatarUrl: String?,
+    val login: String,
+    val name: String,
+    val avatarUrl: String?,
     val position : String,
-    var lastEntry : String?,
+    val lastEntry : String?,
+    val access : Boolean,
     val authorities : String
 
 )
