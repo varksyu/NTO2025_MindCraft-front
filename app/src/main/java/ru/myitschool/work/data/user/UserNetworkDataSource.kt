@@ -43,6 +43,7 @@ class UserNetworkDataSource {
             if (result.status != HttpStatusCode.OK) {
                 error("Status ${result.status}")
             }
+            Log.d("result", result.bodyAsText())
             result.body()
         }
 

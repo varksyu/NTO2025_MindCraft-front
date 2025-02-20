@@ -54,7 +54,7 @@ class QrResultViewModel(
         }
     }
 
-    fun sendResult(code : String) {
+    fun sendResult(code : String?) {
         updateState(code)
     }
 

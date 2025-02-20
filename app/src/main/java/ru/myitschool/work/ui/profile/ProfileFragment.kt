@@ -12,6 +12,7 @@ import ru.myitschool.work.databinding.FragmentProfileBinding
 import ru.myitschool.work.ui.login.EntryActivity
 import ru.myitschool.work.ui.qr.scan.QrScanFragment
 import ru.myitschool.work.utils.collectWithLifecycle
+import ru.sicampus.bootcamp2025.ui.centerList.EntranceAdapter
 
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private var _viewBinding: FragmentProfileBinding? = null
@@ -40,6 +41,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }
+        val adapter = EntranceAdapter()
+        viewBinding.recyclerView.adapter = adapter
 
 
         viewModel.state.collectWithLifecycle(this) { state ->
@@ -60,14 +63,18 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                     else viewBinding.lastEntry.text = "Время последнего входа: ${state.profileInfo.lastEntry}"
                     Picasso.get().load(state.profileInfo.avatarUrl).resize(100, 100).centerCrop().into(viewBinding.imageView)
 
-                    if (state.entrancesList.size == 0) {
+                    if (state.entrancesList.isEmpty()) {
                         viewBinding.noData.visibility = View.VISIBLE
+                    }
+                    else {
+                        viewBinding.recyclerView.visibility = View.VISIBLE
+                        adapter.submitList(state.entrancesList)
+
                     }
 
                 }
                 is ProfileViewModel.State.Error -> {
                     viewBinding.errorText.text = state.text
-
                 }
             }
 

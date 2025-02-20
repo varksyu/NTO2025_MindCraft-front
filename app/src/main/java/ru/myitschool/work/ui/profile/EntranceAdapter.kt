@@ -1,16 +1,17 @@
 package ru.sicampus.bootcamp2025.ui.centerList
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import dagger.hilt.android.qualifiers.ApplicationContext
 import ru.myitschool.work.databinding.OneEntryListViewBinding
 import ru.myitschool.work.domain.user.EntranceEntity
 
 
 class EntranceAdapter(
-    //private val onCenterClick: (CenterEntity) -> Unit
 ) : ListAdapter<EntranceEntity, EntranceAdapter.ViewHolder>(EntranceDiff) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -33,7 +34,7 @@ class EntranceAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item : EntranceEntity) {
             binding.time.text = item.enteredAt
-            binding.type.text = item.enterType
+            binding.time.text = item.enterType
             binding.entry.text = item.name
         }
     }

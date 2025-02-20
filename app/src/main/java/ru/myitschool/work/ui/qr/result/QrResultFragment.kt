@@ -30,9 +30,7 @@ class QrResultFragment : Fragment(R.layout.fragment_qr_result) {
             key, bundle ->
             if (key == QrScanDestination.REQUEST_KEY) {
                 val code = QrScanDestination.getDataIfExist(bundle)
-                if (code != null) {
-                    viewModel.sendResult(code.toString())
-                }
+                viewModel.sendResult(code)
             }
         }
         viewBinding.close.setOnClickListener {
