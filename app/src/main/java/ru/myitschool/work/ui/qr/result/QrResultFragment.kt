@@ -31,7 +31,7 @@ class QrResultFragment : Fragment(R.layout.fragment_qr_result) {
             if (key == QrScanDestination.REQUEST_KEY) {
                 val code = QrScanDestination.getDataIfExist(bundle)
                 if (code != null) {
-                    viewModel.sendResult(code.toLong())
+                    viewModel.sendResult(code.toString())
                 }
             }
         }

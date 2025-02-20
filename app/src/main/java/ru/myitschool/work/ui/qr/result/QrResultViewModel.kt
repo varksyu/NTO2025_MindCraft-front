@@ -26,7 +26,7 @@ class QrResultViewModel(
     private val _state = MutableStateFlow<State>(State.Loading)
     val state = _state.asStateFlow()
 
-    fun updateState(code: Long?) {
+    fun updateState(code: String?) {
         viewModelScope.launch {
             _state.emit(State.Loading)
             if (code == null) {
@@ -54,7 +54,7 @@ class QrResultViewModel(
         }
     }
 
-    fun sendResult(code : Long) {
+    fun sendResult(code : String) {
         updateState(code)
     }
 
