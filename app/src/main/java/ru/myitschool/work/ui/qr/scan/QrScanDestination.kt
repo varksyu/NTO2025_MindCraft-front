@@ -23,6 +23,7 @@ data object QrScanDestination {
     }
 
     internal fun packToBundle(data: String): Bundle {
+
         return bundleOf(
             KEY_QR_DATA to data
         )

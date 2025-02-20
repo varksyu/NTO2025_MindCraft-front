@@ -3,12 +3,14 @@ package ru.myitschool.work.ui
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.createGraph
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.fragment
+import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import ru.myitschool.work.R
@@ -33,16 +35,17 @@ class RootActivity : AppCompatActivity() {
 
         val navController = navHostFragment?.navController ?: throw IllegalStateException("NavHostFragment not found")
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNavigationView.setupWithNavController(navController)
 
         //navController.setGraph(R.navigation.main_nav_graph)
         //navController.navigate(R.id.fragment_profile)
         Log.d("role", "$userRole")
         if (userRole == "ROLE_ADMIN") {
-            navController.setGraph(R.navigation.main_nav_graph)
+            navController.setGraph(R.navigation.main_admin_nav_graph)
             navController.navigate(R.id.fragment_profile)
         } else {
             navController.setGraph(R.navigation.main_nav_graph)
-            bottomNavigationView.menu.clear()
+            bottomNavigationView.visibility = View.GONE
             navController.navigate(R.id.fragment_profile)
 
         }

@@ -18,4 +18,6 @@
     <string name="qr_null_result">Вход был отменён</string>
     <string name="profile">Профиль</string>
     <string name="user_view">Просмотр пользователя</string>
+    <string name="found_user">Найти информацию о сотруднике</string>
+    <string name="find">Найти</string>
 </resources>

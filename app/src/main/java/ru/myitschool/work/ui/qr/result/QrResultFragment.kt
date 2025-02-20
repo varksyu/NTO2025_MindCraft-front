@@ -26,8 +26,7 @@ class QrResultFragment : Fragment(R.layout.fragment_qr_result) {
         super.onViewCreated(view, savedInstanceState)
         parentFragmentManager.setFragmentResultListener(
             QrScanDestination.REQUEST_KEY, viewLifecycleOwner
-        ) {
-            key, bundle ->
+        ) { key, bundle ->
             if (key == QrScanDestination.REQUEST_KEY) {
                 val code = QrScanDestination.getDataIfExist(bundle)
                 viewModel.sendResult(code)

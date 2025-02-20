@@ -56,7 +56,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                 is ProfileViewModel.State.Show -> {
                     viewBinding.noData.visibility = View.GONE
                     viewBinding.name.text = state.profileInfo.name
-                    viewBinding.position.text = "Должность: ${state.profileInfo.name}"
+                    viewBinding.position.text = "Должность: ${state.profileInfo.position}"
                     if (state.profileInfo.lastEntry == null) viewBinding.lastEntry.text = "Время последнего входа: Нет данных"
                     else viewBinding.lastEntry.text = "Время последнего входа: ${state.profileInfo.lastEntry}"
                     Picasso.get().load(state.profileInfo.avatarUrl).resize(100, 100).centerCrop().into(viewBinding.imageView)
