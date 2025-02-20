@@ -15,6 +15,7 @@ import ru.myitschool.work.domain.user.EntranceEntity
 import ru.myitschool.work.domain.user.GetUserUseCase
 import ru.myitschool.work.domain.user.UnBlockUseCase
 import ru.myitschool.work.domain.user.UserEntity
+import ru.myitschool.work.ui.profile.ProfileViewModel.State
 
 class AdminViewModel(
     private val getUserUseCase: GetUserUseCase,
@@ -24,15 +25,9 @@ class AdminViewModel(
     private val _state = MutableStateFlow<State>(State.Loading)
     val state = _state.asStateFlow()
 
-    init {
-        updateStateGet()
-    }
-
-    fun clickRefresh() {
-        updateStateGet()
-    }
-
-    fun updateStateGet() {
+    fun search(
+        login : String,
+    ) {
         viewModelScope.launch {
             _state.emit(State.Loading)
             val entranceList : List<EntranceEntity> = getUserUseCase.getEntrancesList().fold(
@@ -44,21 +39,53 @@ class AdminViewModel(
                 }
             )
             _state.emit(
-                getUserUseCase.invoke().fold(
+                getUserUseCase.invoke(login).fold(
                     onSuccess = { data ->
                         Log.d("uraa", "успех успех ${data.toString()}")
 
-                        State.GoToInfo(data, entranceList)
+                        State.Show(data, entranceList)
                     },
                     onFailure = { error ->
                         Log.d("kaput", error.message.toString())
                         State.Error(error.message.toString())
                     }
-                )
+                ) as State
             )
-            _state.emit(State.Error("о нет ошибка ошибка помогите"))
+            _state.emit(State.Error("Не удалось загрузить профиль"))
         }
     }
+
+//    fun clickRefresh() {
+//        updateStateGet()
+//    }
+
+//    fun updateStateGet() {
+//        viewModelScope.launch {
+//            _state.emit(State.Loading)
+//            val entranceList : List<EntranceEntity> = getUserUseCase.getEntrancesList().fold(
+//                onSuccess = { list ->
+//                    list
+//                },
+//                onFailure = {
+//                    emptyList()
+//                }
+//            )
+//            _state.emit(
+//                getUserUseCase.invoke().fold(
+//                    onSuccess = { data ->
+//                        Log.d("uraa", "успех успех ${data.toString()}")
+//
+//                        State.Show(data, entranceList)
+//                    },
+//                    onFailure = { error ->
+//                        Log.d("kaput", error.message.toString())
+//                        State.Error(error.message.toString())
+//                    }
+//                ) as State
+//            )
+//            _state.emit(State.Error("о нет ошибка ошибка помогите"))
+//        }
+//    }
 
     suspend fun blockUser() {
         blockUseCase.invoke().fold(
@@ -86,8 +113,8 @@ class AdminViewModel(
 
     sealed interface State {
         data object Loading: State
-        data class GoToInfo(
-            val profileInfo: UserEntity,
+        data class Show(
+            val profileInfo : UserEntity,
             val entrancesList : List<EntranceEntity>
         ) : State
         data class Error(

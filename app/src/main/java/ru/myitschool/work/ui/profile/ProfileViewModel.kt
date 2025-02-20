@@ -41,7 +41,7 @@ class ProfileViewModel(
                 }
             )
             _state.emit(
-                getUserUseCase.invoke().fold(
+                getUserUseCase.invoke(null).fold(
                     onSuccess = { data ->
                         Log.d("uraa", "успех успех ${data.toString()}")
                         State.Show(data, entranceList)
