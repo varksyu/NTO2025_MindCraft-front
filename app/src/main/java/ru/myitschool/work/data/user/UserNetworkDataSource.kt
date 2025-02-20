@@ -36,7 +36,7 @@ class UserNetworkDataSource {
 
     suspend fun getEntrancesList(login : String) : Result<List<EntranceDto>> = withContext(Dispatchers.IO){
         runCatching {
-            val result = client.get("http://$SERVER_ADDRESS/api/$login/entrances") {
+            val result = client.get("$SERVER_ADDRESS/api/$login/entrances") {
                 header(HttpHeaders.Authorization, token)
             }
             Log.d("serverCode", "${result.status}")
@@ -47,7 +47,7 @@ class UserNetworkDataSource {
         }
 
     }
-    suspend fun enter(value : Long, login : String): Result<Boolean> = withContext(Dispatchers.IO) {
+    suspend fun enter(value : String, login : String): Result<Boolean> = withContext(Dispatchers.IO) {
         runCatching {
             val result = client.patch("$SERVER_ADDRESS/api/open") {
                 header(HttpHeaders.Authorization, token)

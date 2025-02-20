@@ -10,5 +10,5 @@ class EnterUseCase (
     private fun getUserFromStorage() : UserDto? {
         return authStorageDataSource.userInfo
     }
-    suspend operator fun invoke(value : Long) = repo.enter(value, getUserFromStorage()?.login!!)
+    suspend operator fun invoke(value : String) = repo.enter(value, getUserFromStorage()?.login!!)
 }

@@ -30,7 +30,7 @@ class UserRepoImpl (
         }
     }
 
-    override suspend fun enter(value: Long, login : String): Result<Boolean> {
+    override suspend fun enter(value: String, login : String): Result<Boolean> {
         return userNetworkDataSource.enter(value, login);
     }
 
