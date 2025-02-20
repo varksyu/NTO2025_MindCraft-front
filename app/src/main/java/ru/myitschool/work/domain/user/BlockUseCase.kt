@@ -11,5 +11,5 @@ public class BlockUseCase (
     private fun getUserFromStorage() : UserDto? {
         return authStorageDataSource.userInfo
     }
-    suspend operator fun invoke(value : String) = repo.block(getUserFromStorage()?.login!!)
+    suspend operator fun invoke() = repo.block(getUserFromStorage()?.login!!)
 }

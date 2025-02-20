@@ -16,7 +16,6 @@ import ru.myitschool.work.utils.collectWithLifecycle
 class AdminFragment : Fragment(R.layout.fragment_admin) {
     private var _viewBinding: FragmentAdminBinding? = null
     private val viewBinding: FragmentAdminBinding get() = _viewBinding!!
-
     private val viewModel by viewModels<AdminViewModel> { AdminViewModel.Factory }
 
 
@@ -24,23 +23,23 @@ class AdminFragment : Fragment(R.layout.fragment_admin) {
         _viewBinding = FragmentAdminBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
 
-
-    /*viewModel.state.collectWithLifecycle(this) { state ->
-
-        viewBinding.error.visibility = if (state is AdminViewModel.State.Error) View.VISIBLE else View.GONE
-
-
-        when(state) {
-            is AdminViewModel.State.Loading -> Unit
-            is AdminViewModel.State.GoToInfo -> {
-                findNavController().navigate()
-            }
-            is ProfileViewModel.State.Error -> {
-                viewBinding.errorText.text = state.text
-            }
-        }
-
-    }*/
+//
+//    viewModel.state.collectWithLifecycle(this) { state ->
+//
+//        viewBinding.error.visibility = if (state is AdminViewModel.State.Error) View.VISIBLE else View.GONE
+//
+//
+//        when(state) {
+//            is AdminViewModel.State.Loading -> Unit
+//            is AdminViewModel.State.GoToInfo -> {
+//                findNavController().navigate()
+//            }
+//            is ProfileViewModel.State.Error -> {
+//                viewBinding.errorText.text = state.text
+//            }
+//        }
+//
+//    }
 }
 
 override fun onDestroyView() {

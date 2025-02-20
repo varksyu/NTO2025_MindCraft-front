@@ -10,12 +10,16 @@ import kotlinx.coroutines.launch
 import ru.myitschool.work.data.auth.AuthStorageDataSource
 import ru.myitschool.work.data.user.UserNetworkDataSource
 import ru.myitschool.work.data.user.UserRepoImpl
+import ru.myitschool.work.domain.user.BlockUseCase
 import ru.myitschool.work.domain.user.EntranceEntity
 import ru.myitschool.work.domain.user.GetUserUseCase
+import ru.myitschool.work.domain.user.UnBlockUseCase
 import ru.myitschool.work.domain.user.UserEntity
 
 class AdminViewModel(
-    private val getUserUseCase: GetUserUseCase
+    private val getUserUseCase: GetUserUseCase,
+    private val blockUseCase: BlockUseCase,
+    private val unBlockUseCase: UnBlockUseCase
 ) : ViewModel() {
     private val _state = MutableStateFlow<State>(State.Loading)
     val state = _state.asStateFlow()
@@ -52,11 +56,33 @@ class AdminViewModel(
                     }
                 )
             )
-            //_state.emit(State.Error("о нет ошибка ошибка помогите"))
+            _state.emit(State.Error("о нет ошибка ошибка помогите"))
         }
     }
 
+    suspend fun blockUser() {
+        blockUseCase.invoke().fold(
+            onSuccess = { data ->
+                Log.d("uraa", "успех успех ${data.toString()}")
+            },
+            onFailure = { error ->
+                Log.d("kaput", error.message.toString())
+                State.Error(error.message.toString())
+            }
+        )
+    }
 
+    suspend fun unblockUser() {
+        unBlockUseCase.invoke().fold(
+            onSuccess = { data ->
+                Log.d("uraa", "успех успех ${data.toString()}")
+            },
+            onFailure = { error ->
+                Log.d("kaput", error.message.toString())
+                State.Error(error.message.toString())
+            }
+        )
+    }
 
     sealed interface State {
         data object Loading: State
@@ -77,6 +103,16 @@ class AdminViewModel(
                         repo = UserRepoImpl(
                             userNetworkDataSource = UserNetworkDataSource()
                         ),
+                        authStorageDataSource = AuthStorageDataSource
+                    ),
+                    blockUseCase = BlockUseCase(repo = UserRepoImpl(
+                        userNetworkDataSource = UserNetworkDataSource()
+                    ),
+                        authStorageDataSource = AuthStorageDataSource
+                    ),
+                    unBlockUseCase = UnBlockUseCase(repo = UserRepoImpl(
+                        userNetworkDataSource = UserNetworkDataSource()
+                    ),
                         authStorageDataSource = AuthStorageDataSource
                     )
                 ) as T
