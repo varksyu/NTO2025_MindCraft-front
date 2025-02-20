@@ -2,12 +2,14 @@ package ru.myitschool.work.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.createGraph
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.fragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import ru.myitschool.work.R
 import ru.myitschool.work.ui.login.LoginDestination
@@ -30,21 +32,20 @@ class RootActivity : AppCompatActivity() {
 
 
         val navController = navHostFragment?.navController ?: throw IllegalStateException("NavHostFragment not found")
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
 
-        navController.setGraph(R.navigation.main_nav_graph)
-        navController.navigate(R.id.fragment_profile)
-        /*if (userRole == "ROLE_ADMIN") {
-            //bottomNavigationView.menu.clear()
-            //bottomNavigationView.inflateMenu(R.menu.bottom_menu_admin)
-            navController.setGraph(R.navigation.main_admin_nav_graph)
-
-        } else {
+        //navController.setGraph(R.navigation.main_nav_graph)
+        //navController.navigate(R.id.fragment_profile)
+        Log.d("role", "$userRole")
+        if (userRole == "ROLE_ADMIN") {
             navController.setGraph(R.navigation.main_nav_graph)
             navController.navigate(R.id.fragment_profile)
-        }*/
+        } else {
+            navController.setGraph(R.navigation.main_nav_graph)
+            bottomNavigationView.menu.clear()
+            navController.navigate(R.id.fragment_profile)
 
-
-
+        }
 
 
 

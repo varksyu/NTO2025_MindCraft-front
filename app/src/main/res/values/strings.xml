@@ -16,4 +16,6 @@
     <string name="qr_success_result">Успешно</string>
     <string name="qr_wrong_result">Что-то пошло не так</string>
     <string name="qr_null_result">Вход был отменён</string>
+    <string name="profile">Профиль</string>
+    <string name="user_view">Просмотр пользователя</string>
 </resources>

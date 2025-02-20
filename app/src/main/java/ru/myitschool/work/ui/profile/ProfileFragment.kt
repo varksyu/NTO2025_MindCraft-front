@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.squareup.picasso.Picasso
 import ru.myitschool.work.R
 import ru.myitschool.work.databinding.FragmentProfileBinding
@@ -34,12 +35,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             requireActivity().finish()
         }
         viewBinding.qrScan.setOnClickListener{
-            val qrScanFragment = QrScanFragment()
-            val fragmentManager = parentFragmentManager
-            val fragmentTransaction = fragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.fragment_container, qrScanFragment)
-            fragmentTransaction.addToBackStack(null)
-            fragmentTransaction.commit()
+            findNavController().navigate(R.id.action_fragment_profile_to_fragment_qr)
         }
         val adapter = EntranceAdapter()
         viewBinding.recyclerView.adapter = adapter
