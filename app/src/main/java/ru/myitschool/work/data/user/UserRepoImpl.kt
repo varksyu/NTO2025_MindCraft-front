@@ -2,6 +2,7 @@ package ru.myitschool.work.data.user
 import ru.myitschool.work.domain.user.EntranceEntity
 import ru.myitschool.work.domain.user.UserEntity
 import ru.myitschool.work.domain.user.UserRepo
+import kotlin.contracts.Returns
 import kotlin.math.log
 
 
@@ -44,5 +45,11 @@ class UserRepoImpl (
         )
     }
 
+    override suspend fun block(login: String): Result<Boolean> {
+        return userNetworkDataSource.block(login);
+    }
 
+    override suspend fun unblock(login: String): Result<Boolean> {
+        return userNetworkDataSource.block(login);
+    }
 }

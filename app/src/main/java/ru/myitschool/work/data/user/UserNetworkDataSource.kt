@@ -60,4 +60,30 @@ class UserNetworkDataSource {
             result.body<Boolean>()
         }
     }
+
+    suspend fun block(login : String) : Result<Boolean> = withContext(Dispatchers.IO) {
+        runCatching {
+            val result = client.patch("$SERVER_ADDRESS/api/{login}/block") {
+                header(HttpHeaders.Authorization, token)
+            }
+            Log.d("result", "${result.status}")
+            if (result.status != HttpStatusCode.OK) {
+                error("Status ${result.status}")
+            }
+            result.body<Boolean>()
+        }
+    }
+
+    suspend fun unBlock(login : String) : Result<Boolean> = withContext(Dispatchers.IO) {
+        runCatching {
+            val result = client.patch("$SERVER_ADDRESS/api/{login}/unblock") {
+                header(HttpHeaders.Authorization, token)
+            }
+            Log.d("result", "${result.status}")
+            if (result.status != HttpStatusCode.OK) {
+                error("Status ${result.status}")
+            }
+            result.body<Boolean>()
+        }
+    }
 }
