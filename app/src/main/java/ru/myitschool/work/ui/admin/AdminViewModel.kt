@@ -47,11 +47,11 @@ class AdminViewModel(
                     },
                     onFailure = { error ->
                         Log.d("kaput", error.message.toString())
-                        State.Error(error.message.toString())
+                        State.Error("Не удалось загрузить профиль")
                     }
                 ) as State
             )
-            _state.emit(State.Error("Не удалось загрузить профиль"))
+
         }
     }
 
