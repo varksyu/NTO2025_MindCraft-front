@@ -49,17 +49,17 @@ class RootActivity : AppCompatActivity() {
 
 
 
-        /*onBackPressedDispatcher.addCallback(
+        onBackPressedDispatcher.addCallback(
             this,
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
                     onSupportNavigateUp()
                 }
             }
-        )*/
+        )
     }
 
-    /*override fun onSupportNavigateUp(): Boolean {
+    override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         val popBackResult = if (navController.previousBackStackEntry != null) {
             navController.popBackStack()
@@ -67,6 +67,6 @@ class RootActivity : AppCompatActivity() {
             false
         }
         return popBackResult || super.onSupportNavigateUp()
-    }*/
+    }
 
 }

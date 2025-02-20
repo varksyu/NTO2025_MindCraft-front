@@ -48,6 +48,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             viewBinding.loading.visibility = if (state is ProfileViewModel.State.Loading) View.VISIBLE else View.GONE
             viewBinding.profile.visibility = if (state is ProfileViewModel.State.Show) View.VISIBLE else View.GONE
 
+
+
             when(state) {
                 is ProfileViewModel.State.Loading -> Unit
                 is ProfileViewModel.State.Show -> {

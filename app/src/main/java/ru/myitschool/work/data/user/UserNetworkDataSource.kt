@@ -16,7 +16,7 @@ import ru.myitschool.work.data.auth.Network.client
 
 class UserNetworkDataSource {
     suspend fun getUser(login : String): Result<UserDto> = withContext(Dispatchers.IO) {
-        //runCatching {
+        runCatching {
 
         val result = client.get("$SERVER_ADDRESS/api/${login}/info") {
             header(HttpHeaders.Authorization, token)
@@ -31,7 +31,7 @@ class UserNetworkDataSource {
         }
         Log.d("result", result.bodyAsText())
         result.body()
-       // }
+        }
     }
 
     suspend fun getEntrancesList(login : String) : Result<List<EntranceDto>> = withContext(Dispatchers.IO){
