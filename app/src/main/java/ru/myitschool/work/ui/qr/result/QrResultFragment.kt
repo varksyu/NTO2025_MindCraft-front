@@ -20,10 +20,10 @@ class QrResultFragment : Fragment(R.layout.fragment_qr_result) {
     private val viewModel by viewModels<QrResultViewModel> { QrResultViewModel.Factory }
 
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         _viewBinding = FragmentQrResultBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
-
         parentFragmentManager.setFragmentResultListener(
             QrScanDestination.REQUEST_KEY, viewLifecycleOwner
         ) {

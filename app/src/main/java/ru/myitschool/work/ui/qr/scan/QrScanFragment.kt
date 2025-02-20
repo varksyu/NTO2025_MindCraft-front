@@ -122,10 +122,13 @@ class QrScanFragment : Fragment(R.layout.fragment_qr_scan) {
             QrScanDestination.REQUEST_KEY,
             bundle
         )
-        findNavControllerOrNull()
-            ?.previousBackStackEntry
-            ?.savedStateHandle
-            ?.set(QrScanDestination.REQUEST_KEY, bundle)
+        if (!bundle.isEmpty) {
+            findNavController().navigate(R.id.action_fragment_qr_to_fragment_qr_result)
+        }
+//        findNavControllerOrNull()
+//            ?.previousBackStackEntry
+//            ?.savedStateHandle
+//            ?.set(QrScanDestination.REQUEST_KEY, bundle)
     }
 
     private fun findNavControllerOrNull(): NavController? {

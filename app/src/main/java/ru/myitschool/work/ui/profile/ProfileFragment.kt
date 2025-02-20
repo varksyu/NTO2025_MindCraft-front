@@ -36,6 +36,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         }
         viewBinding.qrScan.setOnClickListener{
             findNavController().navigate(R.id.action_fragment_profile_to_fragment_qr)
+
+
         }
         val adapter = EntranceAdapter()
         viewBinding.recyclerView.adapter = adapter

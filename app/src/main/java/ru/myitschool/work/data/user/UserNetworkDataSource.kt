@@ -5,6 +5,7 @@ import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.request.header
 import io.ktor.client.request.patch
+import io.ktor.client.request.setBody
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
@@ -50,9 +51,10 @@ class UserNetworkDataSource {
     }
     suspend fun enter(value : String, login : String): Result<Boolean> = withContext(Dispatchers.IO) {
         runCatching {
-            val result = client.patch("$SERVER_ADDRESS/api/open") {
+            val result = client.patch("$SERVER_ADDRESS/api/$login/open") {
                 header(HttpHeaders.Authorization, token)
-
+                header(HttpHeaders.ContentType, "application/json")
+                setBody(CodeDto(value))
             }
             Log.d("result", "${result.status}")
             if (result.status != HttpStatusCode.OK) {
